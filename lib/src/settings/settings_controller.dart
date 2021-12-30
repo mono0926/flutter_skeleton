@@ -18,9 +18,13 @@ class SettingsController with ChangeNotifier {
   }
 
   Future<void> updateThemeMode(ThemeMode? newThemeMode) async {
-    if (newThemeMode == null) return;
+    if (newThemeMode == null) {
+      return;
+    }
 
-    if (newThemeMode == _themeMode) return;
+    if (newThemeMode == _themeMode) {
+      return;
+    }
 
     _themeMode = newThemeMode;
 
