@@ -14,7 +14,6 @@ class App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(themeModeProvider).value;
     return MaterialApp(
       restorationScopeId: 'app',
       localizationsDelegates: const [
@@ -29,7 +28,7 @@ class App extends ConsumerWidget {
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
       theme: ThemeData.from(colorScheme: const ColorScheme.light()),
       darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()),
-      themeMode: themeMode,
+      themeMode: ref.watch(themeModeProvider).value!,
       onGenerateRoute: (routeSettings) => MaterialPageRoute<void>(
         settings: routeSettings,
         builder: (context) {
