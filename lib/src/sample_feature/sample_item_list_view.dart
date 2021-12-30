@@ -44,9 +44,7 @@ class SampleItemListView extends ConsumerWidget {
             leading: const CircleAvatar(
               foregroundImage: AssetImage('assets/images/flutter_logo.png'),
             ),
-            onTap: () {
-              router.go('/items/$id');
-            },
+            onTap: () => router.go('/items/$id'),
           );
         },
       ),
