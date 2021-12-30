@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:skeleton/src/settings/settings_state.dart';
 
 import 'settings_service.dart';
 
-class SettingsController with ChangeNotifier {
-  SettingsController(this._settingsService);
+final settingsState = StateNotifierProvider<SettingsController, SettingState>(
+  (ref) => SettingsController._(ref.read),
+);
 
-  final SettingsService _settingsService;
-
-  late ThemeMode _themeMode;
-
-  ThemeMode get themeMode => _themeMode;
-
-  Future<void> loadSettings() async {
-    _themeMode = await _settingsService.themeMode();
-
-    notifyListeners();
+class SettingsController extends StateNotifier<SettingState> {
+  SettingsController._(this._read) : super(const SettingState()) {
+    Future(() async {
+      state = state.copyWith(
+        themeMode: await _settingsService.themeMode,
+      );
+    });
   }
 
-  Future<void> updateThemeMode(ThemeMode? newThemeMode) async {
-    if (newThemeMode == null) {
+  final Reader _read;
+  SettingsService get _settingsService => _read(settingsService);
+
+  Future<void> updateThemeMode(ThemeMode? themeMode) async {
+    if (themeMode == null) {
       return;
     }
-
-    if (newThemeMode == _themeMode) {
+    if (themeMode == state.themeMode) {
       return;
     }
-
-    _themeMode = newThemeMode;
-
-    notifyListeners();
-
-    await _settingsService.updateThemeMode(newThemeMode);
+    state = state.copyWith(
+      themeMode: themeMode,
+    );
+    await _settingsService.updateThemeMode(themeMode);
   }
 }

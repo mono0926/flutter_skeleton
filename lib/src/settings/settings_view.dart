@@ -1,39 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:skeleton/src/extension/extension.dart';
 
 import 'settings_controller.dart';
 
-class SettingsView extends StatelessWidget {
-  const SettingsView({Key? key, required this.controller}) : super(key: key);
+class SettingsView extends ConsumerWidget {
+  const SettingsView({Key? key}) : super(key: key);
 
   static const routeName = '/settings';
 
-  final SettingsController controller;
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.watch(settingsState.notifier);
+    final themeMode = ref.watch(settingsState.select((s) => s.themeMode));
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: DropdownButton<ThemeMode>(
-          value: controller.themeMode,
+        child: DropdownButton(
+          value: themeMode,
           onChanged: controller.updateThemeMode,
-          items: const [
-            DropdownMenuItem(
-              value: ThemeMode.system,
-              child: Text('System Theme'),
-            ),
-            DropdownMenuItem(
-              value: ThemeMode.light,
-              child: Text('Light Theme'),
-            ),
-            DropdownMenuItem(
-              value: ThemeMode.dark,
-              child: Text('Dark Theme'),
-            )
-          ],
+          items: ThemeMode.values.map((themeMode) {
+            return DropdownMenuItem(
+              value: themeMode,
+              child: Text('${themeMode.name.capitalized} Theme'),
+            );
+          }).toList(),
         ),
       ),
     );
