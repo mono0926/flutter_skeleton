@@ -35,7 +35,7 @@ class SampleItemListView extends StatelessWidget {
       body: ListView.builder(
         restorationId: 'sampleItemListView',
         itemCount: items.length,
-        itemBuilder: (BuildContext context, int index) {
+        itemBuilder: (context, index) {
           final item = items[index];
 
           return ListTile(

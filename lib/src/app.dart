@@ -28,27 +28,25 @@ class MyApp extends ConsumerWidget {
             supportedLocales: const [
               Locale('en', ''),
             ],
-            onGenerateTitle: (BuildContext context) =>
+            onGenerateTitle: (context) =>
                 AppLocalizations.of(context)!.appTitle,
             theme: ThemeData.from(colorScheme: const ColorScheme.light()),
             darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()),
             themeMode: themeMode,
-            onGenerateRoute: (RouteSettings routeSettings) {
-              return MaterialPageRoute<void>(
-                settings: routeSettings,
-                builder: (BuildContext context) {
-                  switch (routeSettings.name) {
-                    case SettingsView.routeName:
-                      return const SettingsView();
-                    case SampleItemDetailsView.routeName:
-                      return const SampleItemDetailsView();
-                    case SampleItemListView.routeName:
-                    default:
-                      return const SampleItemListView();
-                  }
-                },
-              );
-            },
+            onGenerateRoute: (routeSettings) => MaterialPageRoute<void>(
+              settings: routeSettings,
+              builder: (context) {
+                switch (routeSettings.name) {
+                  case SettingsView.routeName:
+                    return const SettingsView();
+                  case SampleItemDetailsView.routeName:
+                    return const SampleItemDetailsView();
+                  case SampleItemListView.routeName:
+                  default:
+                    return const SampleItemListView();
+                }
+              },
+            ),
           );
   }
 }
