@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:skeleton/src/extension/extension.dart';
 
+import '../extension/extension.dart';
 import 'settings_controller.dart';
 
 class SettingsView extends ConsumerWidget {
