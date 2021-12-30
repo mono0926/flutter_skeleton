@@ -14,39 +14,36 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(settingsState.select((s) => s.themeMode));
-    return themeMode == null
-        ? const SizedBox.shrink()
-        : MaterialApp(
-            restorationScopeId: 'app',
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: const [
-              Locale('en', ''),
-            ],
-            onGenerateTitle: (context) =>
-                AppLocalizations.of(context)!.appTitle,
-            theme: ThemeData.from(colorScheme: const ColorScheme.light()),
-            darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()),
-            themeMode: themeMode,
-            onGenerateRoute: (routeSettings) => MaterialPageRoute<void>(
-              settings: routeSettings,
-              builder: (context) {
-                switch (routeSettings.name) {
-                  case SettingsView.routeName:
-                    return const SettingsView();
-                  case SampleItemDetailsView.routeName:
-                    return const SampleItemDetailsView();
-                  case SampleItemListView.routeName:
-                  default:
-                    return const SampleItemListView();
-                }
-              },
-            ),
-          );
+    final themeMode = ref.watch(themeModeProvider).value;
+    return MaterialApp(
+      restorationScopeId: 'app',
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''),
+      ],
+      onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
+      theme: ThemeData.from(colorScheme: const ColorScheme.light()),
+      darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()),
+      themeMode: themeMode,
+      onGenerateRoute: (routeSettings) => MaterialPageRoute<void>(
+        settings: routeSettings,
+        builder: (context) {
+          switch (routeSettings.name) {
+            case SettingsView.routeName:
+              return const SettingsView();
+            case SampleItemDetailsView.routeName:
+              return const SampleItemDetailsView();
+            case SampleItemListView.routeName:
+            default:
+              return const SampleItemListView();
+          }
+        },
+      ),
+    );
   }
 }

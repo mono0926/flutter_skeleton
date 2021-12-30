@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:skeleton/src/settings/settings_state.dart';
 
 import 'settings_service.dart';
 
-final settingsState = StateNotifierProvider<SettingsController, SettingState>(
-  (ref) => SettingsController._(ref.read),
+final themeModeProvider =
+    StateNotifierProvider<ThemeModeController, AsyncValue<ThemeMode>>(
+  (ref) => ThemeModeController._(ref.read),
 );
 
-class SettingsController extends StateNotifier<SettingState> {
-  SettingsController._(this._read) : super(const SettingState()) {
+class ThemeModeController extends StateNotifier<AsyncValue<ThemeMode>> {
+  ThemeModeController._(this._read) : super(const AsyncValue.loading()) {
     Future(() async {
-      state = state.copyWith(
-        themeMode: await _settingsService.themeMode,
-      );
+      state = await AsyncValue.guard(() => _settingsService.themeMode);
     });
   }
 
@@ -21,12 +19,10 @@ class SettingsController extends StateNotifier<SettingState> {
   SettingsService get _settingsService => _read(settingsService);
 
   Future<void> updateThemeMode(ThemeMode themeMode) async {
-    if (themeMode == state.themeMode) {
+    if (themeMode == state.value) {
       return;
     }
-    state = state.copyWith(
-      themeMode: themeMode,
-    );
+    state = AsyncValue.data(themeMode);
     await _settingsService.updateThemeMode(themeMode);
   }
 }

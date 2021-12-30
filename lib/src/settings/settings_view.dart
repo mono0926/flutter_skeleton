@@ -11,8 +11,8 @@ class SettingsView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.watch(settingsState.notifier);
-    final themeMode = ref.watch(settingsState.select((s) => s.themeMode));
+    final controller = ref.watch(themeModeProvider.notifier);
+    final themeMode = ref.watch(themeModeProvider).value;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
