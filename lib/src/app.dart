@@ -28,20 +28,6 @@ class App extends ConsumerWidget {
       theme: ThemeData.from(colorScheme: const ColorScheme.light()),
       darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()),
       themeMode: ref.watch(themeModeProvider).value,
-      // onGenerateRoute: (routeSettings) => MaterialPageRoute<void>(
-      //   settings: routeSettings,
-      //   builder: (context) {
-      //     switch (routeSettings.name) {
-      //       case SettingsView.routeName:
-      //         return const SettingsView();
-      //       case SampleItemDetailsView.routeName:
-      //         return const SampleItemDetailsView();
-      //       case SampleItemListView.routeName:
-      //       default:
-      //         return const SampleItemListView();
-      //     }
-      //   },
-      // ),
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,
     );
