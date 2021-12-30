@@ -15,8 +15,6 @@ class SampleItemListView extends ConsumerWidget {
     ],
   }) : super(key: key);
 
-  static const routeName = '/';
-
   final List<SampleItem> items;
 
   @override

@@ -12,7 +12,7 @@ final routerProvider = Provider(
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
-        path: SampleItemListView.routeName,
+        path: '/',
         redirect: (_) => _itemsPath,
       ),
       GoRoute(
