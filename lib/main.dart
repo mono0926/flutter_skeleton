@@ -14,7 +14,7 @@ Future<void> main() async {
       overrides: [
         themeModeProvider.overrideWithValue(settingsController),
       ],
-      child: const MyApp(),
+      child: const App(),
     ),
   );
 }
