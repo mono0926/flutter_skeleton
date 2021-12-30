@@ -11,8 +11,6 @@ class SettingsView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.watch(themeModeProvider.notifier);
-    final themeMode = ref.watch(themeModeProvider).value;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
@@ -20,8 +18,9 @@ class SettingsView extends ConsumerWidget {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: DropdownButton<ThemeMode>(
-          value: themeMode,
-          onChanged: (themeMode) => controller.updateThemeMode(themeMode!),
+          value: ref.watch(themeModeProvider).value,
+          onChanged: (themeMode) =>
+              ref.read(themeModeProvider.notifier).updateThemeMode(themeMode!),
           items: ThemeMode.values.map((themeMode) {
             return DropdownMenuItem(
               value: themeMode,
