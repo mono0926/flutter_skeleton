@@ -19,9 +19,9 @@ class SettingsView extends ConsumerWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: DropdownButton(
+        child: DropdownButton<ThemeMode>(
           value: themeMode,
-          onChanged: controller.updateThemeMode,
+          onChanged: (themeMode) => controller.updateThemeMode(themeMode!),
           items: ThemeMode.values.map((themeMode) {
             return DropdownMenuItem(
               value: themeMode,

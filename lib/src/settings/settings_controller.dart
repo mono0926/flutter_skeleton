@@ -20,10 +20,7 @@ class SettingsController extends StateNotifier<SettingState> {
   final Reader _read;
   SettingsService get _settingsService => _read(settingsService);
 
-  Future<void> updateThemeMode(ThemeMode? themeMode) async {
-    if (themeMode == null) {
-      return;
-    }
+  Future<void> updateThemeMode(ThemeMode themeMode) async {
     if (themeMode == state.themeMode) {
       return;
     }
