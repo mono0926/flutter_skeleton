@@ -13,12 +13,15 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  flutter_riverpod:
+  go_router:
+  state_notifier:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints:
+  pedantic_mono:
 
 flutter:
   uses-material-design: true
