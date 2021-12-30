@@ -15,6 +15,7 @@ dependencies:
     sdk: flutter
   flutter_riverpod:
   go_router:
+  shared_preferences:
   state_notifier:
 
 dev_dependencies:
