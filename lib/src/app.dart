@@ -30,8 +30,8 @@ class MyApp extends ConsumerWidget {
             ],
             onGenerateTitle: (BuildContext context) =>
                 AppLocalizations.of(context)!.appTitle,
-            theme: ThemeData(),
-            darkTheme: ThemeData.dark(),
+            theme: ThemeData.from(colorScheme: const ColorScheme.light()),
+            darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()),
             themeMode: themeMode,
             onGenerateRoute: (RouteSettings routeSettings) {
               return MaterialPageRoute<void>(
