@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'src/app.dart';
-import 'src/settings/settings_controller.dart';
+import 'src/settings/settings_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final container = ProviderContainer();
-  final themeModeController = container.read(themeModeProvider.notifier);
-  await container.read(themeModeProvider.future);
+  final sharedPreferences = await SharedPreferences.getInstance();
   runApp(
     ProviderScope(
       overrides: [
-        themeModeProvider.overrideWithValue(themeModeController),
+        sharedPreferencesProvider.overrideWithValue(sharedPreferences),
       ],
       child: const App(),
     ),

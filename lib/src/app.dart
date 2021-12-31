@@ -27,7 +27,7 @@ class App extends ConsumerWidget {
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
       theme: ThemeData.from(colorScheme: const ColorScheme.light()),
       darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()),
-      themeMode: ref.watch(themeModeProvider).value,
+      themeMode: ref.watch(themeModeProvider),
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,
     );
